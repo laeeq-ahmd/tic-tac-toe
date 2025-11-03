@@ -2,21 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
 </head>
 <body>
     
-    <div class='game'></div>
-    <button class="btn" onclick="tic_tac_toe.restart()" title="Restart this game">Restart</button>
-
-    <script src="js/tic-tac-toe.js"></script>
-    <script>
-        tic_tac_toe.init( document.querySelector('.game') );
-        tic_tac_toe.start();
-    </script>
-    
+    <div id = "gameContainer">
+        <h1>Tic Tac Toe</h1>
+        <h2 id = "statusText"></h2>
+        <div id = "cellContainer">
+            <div class="cell" cellIndex="0"></div>
+            <div class='cell' cellIndex="1"></div>
+            <div class='cell' cellIndex="2"></div>
+            <div class='cell' cellIndex="3"></div>
+            <div class='cell' cellIndex="4"></div>
+            <div class='cell' cellIndex="5"></div>
+            <div class='cell' cellIndex="6"></div>
+            <div class='cell' cellIndex="7"></div>
+            <div class='cell' cellIndex="8"></div>
+        </div>
+        <button id = 'restartBtn'>Restart</button>
+    </div>
 </body>
 </html>
