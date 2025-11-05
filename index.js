@@ -1,6 +1,11 @@
 const cells = document.querySelectorAll('.cell');
 const statusText = document.querySelector('#statusText');
 const restartButton = document.querySelector('#restartBtn');
+const themeToggleBtn = document.getElementById('themeToggleBtn');
+const themeIcon = document.getElementById('themeIcon');
+const body = document.body;
+
+
 const winConditions = [
     [0, 1, 2],
     [3, 4, 5], 
@@ -69,4 +74,45 @@ function restartGame() {
     statusText.textContent = `${currentPlayer}'s turn`;
     cells.forEach(cell => cell.textContent = '');
     running = true;
+}
+function setTheme(theme) {
+    if (theme === 'dark') {
+        // 1. Apply the .dark-mode class to the body
+        body.classList.add('dark-mode');
+        // 2. Change the icon to the sun
+        themeIcon.textContent = 'light_mode';
+        // 3. Save the preference to localStorage
+        localStorage.setItem('theme', 'dark');
+    } else {
+        // 1. Remove the .dark-mode class from the body
+        body.classList.remove('dark-mode');
+        // 2. Change the icon to the moon
+        themeIcon.textContent = 'dark_mode';
+        // 3. Save the preference to localStorage
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// Add a click event listener
+themeToggleBtn.addEventListener('click', () => {
+    // Check if the body *already* has the dark-mode class
+    if (body.classList.contains('dark-mode')) {
+        // If it's dark, switch to light
+        setTheme('light');
+    } else {
+        // If it's light, switch to dark
+        setTheme('dark');
+    }
+});
+
+const savedTheme = localStorage.getItem('theme');
+
+if (savedTheme) {
+    // If we found a saved theme, apply it
+    setTheme(savedTheme);
+} else {
+    // No theme saved, so default to light mode
+    // (We don't need to do anything here, as 'light' is the default
+    // state, but we could explicitly call setTheme('light') if we wanted)
+    setTheme('light'); 
 }

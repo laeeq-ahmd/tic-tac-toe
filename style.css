@@ -1,12 +1,50 @@
-.cell {
-  border: 2px solid;
+/* STEP 1: Define all colors as variables in :root.
+  This is your default "Light Mode".
+*/
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --cell-border-color: #000000;
+  --cell-shadow-color: #000000;
+  --btn-bg-color: #f0f0f0;
+  --btn-text-color: #000000;
+  /* --icon-filter: ... (This is no longer needed) */
+}
+
+/* STEP 2: Create a .dark-mode class that re-defines the variables.
+  This will be toggled onto the <body> tag by JavaScript.
+*/
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #e3e3e3;
+  --cell-border-color: #e3e3e3;
+  --cell-shadow-color: #e3e3e3;
+  --btn-bg-color: #333333;
+  --btn-text-color: #e3e3e3;
+  /* --icon-filter: invert(100%); How to filter the icon color in dark mode */
+}
+
+/* STEP 3: Apply variables to your existing styles.
+*/
+
+body {
   font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  /* Add a smooth transition for the color changes */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cell {
+  border: 2px solid var(--cell-border-color);
   height: 75px;
   width: 75px;
   cursor: pointer;
   font-size: 50px;
-  box-shadow: 0 0 0 2px;
+  box-shadow: 0 0 0 2px var(--cell-shadow-color);
   line-height: 75px;
+  /* Make sure the X's and O's also change color */
+  color: var(--text-color);
 }
 
 #cellContainer {
@@ -14,16 +52,90 @@
   grid-template-columns: repeat(3, auto);
   width: 225px;
   margin: auto;
-
 }
 
 #gameContainer {
   text-align: center;
+  /* Add relative positioning so the toggle button can be 
+     positioned absolutely inside it */
+  position: relative;
+  padding-top: 20px; /* Add some space at the top */
 }
-#restartBtn{
+
+#restartBtn {
   margin-top: 30px;
   padding: 10px 20px;
   font-size: 1em;
   cursor: pointer;
   text-align: center;
+  /* Apply variables */
+  background-color: var(--btn-bg-color);
+  color: var(--btn-text-color);
+  border: 1px solid var(--cell-border-color);
+}
+
+/* STEP 4: Add styles for the new theme toggle button.
+*/
+#themeToggleBtn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  /* Make it round */
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  
+  /* Styling */
+  background-color: var(--btn-bg-color);
+  border: 1px solid var(--cell-border-color);
+  cursor: pointer;
+  
+  /* Center the icon inside */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+#themeToggleBtn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  
+  /* Apply variables. The 'color' will style the icon! */
+  background-color: var(--btn-bg-color);
+  color: var(--text-color); /* This now colors the icon */
+  border: 1px solid var(--cell-border-color);
+  cursor: pointer;
+  
+  /* Center the icon span */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+#themeToggleBtn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  
+  /* Apply variables. The 'color' will style the icon! */
+  background-color: var(--btn-bg-color);
+  color: var(--text-color); /* This now colors the icon */
+  border: 1px solid var(--cell-border-color);
+  cursor: pointer;
+  
+  /* Center the icon span */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 }
