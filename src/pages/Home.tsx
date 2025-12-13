@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import ThemeToggle from '@/components/ThemeToggle';
 
+import homeImg from '@/assets/home.png';
+
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
@@ -17,7 +19,7 @@ const Home: React.FC = () => {
         {/* Logo & Title */}
         <div className="text-center space-y-4">
           <img
-            src="/home.png"
+            src={homeImg}
             alt="Tic Tac Toe Plus"
             className="w-24 h-24 mb-4 mx-auto rounded-3xl shadow-elevated object-cover"
           />
