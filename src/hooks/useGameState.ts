@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { socket } from '@/lib/socket';
 import { toast } from 'sonner';
 
@@ -41,6 +41,13 @@ export function useGameState(mode: GameMode, options?: { roomCode?: string | nul
   const [opponentDisconnected, setOpponentDisconnected] = useState(false);
   const [restartRequested, setRestartRequested] = useState(false);
   const [opponentRequestedRestart, setOpponentRequestedRestart] = useState(false);
+
+  // Ref to track status inside socket callbacks without re-triggering effect
+  const statusRef = React.useRef(status);
+
+  useEffect(() => {
+    statusRef.current = status;
+  }, [status]);
 
   const checkWinner = useCallback((board: Board): { winner: Player; line: number[] | null } => {
     for (const combo of WINNING_COMBINATIONS) {
@@ -169,15 +176,18 @@ export function useGameState(mode: GameMode, options?: { roomCode?: string | nul
       console.log('Received player_left event');
       toast.error("Opponent disconnected");
       setOpponentDisconnected(true);
-      setStatus('won'); // End the game
 
-      // Award win to local player
-      if (options?.mySymbol) {
-        setWinner(options.mySymbol);
-        setScores(prev => ({
-          ...prev,
-          [options.mySymbol!]: prev[options.mySymbol!] + 1
-        }));
+      // Only award win if game was still active
+      if (statusRef.current === 'playing') {
+        setStatus('won'); // End the game
+        // Award win to local player
+        if (options?.mySymbol) {
+          setWinner(options.mySymbol);
+          setScores(prev => ({
+            ...prev,
+            [options.mySymbol!]: prev[options.mySymbol!] + 1
+          }));
+        }
       }
     };
 
