@@ -172,8 +172,8 @@ const Multiplayer: React.FC = () => {
                     <div
                       key={i}
                       className={cn(
-                        "w-16 h-20 flex items-center justify-center",
-                        "bg-secondary rounded-xl text-5xl font-bold",
+                        "w-12 h-16 sm:w-16 sm:h-20 flex items-center justify-center",
+                        "bg-secondary rounded-xl text-3xl sm:text-5xl font-bold",
                         "border-2 border-primary/20 animate-glow-pulse"
                       )}
                       style={{ animationDelay: `${i * 0.1}s` }}
@@ -234,7 +234,7 @@ const Multiplayer: React.FC = () => {
                   setJoinCode(value.slice(0, 5));
                 }}
                 placeholder="XXXXX"
-                className="text-center text-5xl font-bold tracking-[0.5em] h-20 uppercase placeholder:text-muted-foreground/20"
+                className="text-center text-3xl sm:text-5xl font-bold tracking-[0.2em] sm:tracking-[0.5em] h-16 sm:h-20 uppercase placeholder:text-muted-foreground/20"
                 maxLength={5}
               />
             </div>

@@ -169,7 +169,27 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
+import os from 'os';
+
+// ... (existing imports)
+
+// ... (existing code)
+
 const PORT = process.env.PORT || 3005;
 httpServer.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    console.log(); // Empty line
+    console.log(`  ➜  Local:   http://localhost:${PORT}/`);
+
+    // Get network interfaces to show LAN IP
+    const interfaces = os.networkInterfaces();
+    for (const name of Object.keys(interfaces)) {
+        for (const iface of interfaces[name]) {
+            // Skip internal and non-IPv4 addresses
+            if (iface.family === 'IPv4' && !iface.internal) {
+                console.log(`  ➜  Network: http://${iface.address}:${PORT}/`);
+            }
+        }
+    }
+    console.log(); // Empty line
 });
