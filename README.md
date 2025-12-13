@@ -3,7 +3,7 @@
 A modern, polished, and feature-rich implementation of the classic Tic Tac Toe game. Built with React, Vite, and TailwindCSS, this application offers a premium user experience with smooth animations, glassmorphism design, and multiple game modes.
 
 <p align="center">
-  <img src="public/home.png" width="150" alt="Tic Tac Toe Plus Logo" />
+  <img src="src/assets/home.png" width="150" alt="Tic Tac Toe Plus Logo" />
 </p>
 
 ## Features
